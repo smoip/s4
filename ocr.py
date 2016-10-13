@@ -46,7 +46,7 @@ base16_to_dumb16 = {
     "F": "F"
 }
 
-dumb16_to_base16 = dict((y,x) for x,y in base16_encode_conversion.iteritems())
+dumb16_to_base16 = dict((y,x) for x,y in base16_to_dumb16.iteritems())
 
 def encode(message):
     return "".join([base16_to_dumb16[char] for char in base64.b16encode(message)])
