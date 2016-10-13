@@ -27,7 +27,7 @@ stuff = {
     "target": "test.png"
 }
 
-base16_encode_conversion = {
+base16_to_dumb16 = {
     "0": "G",
     "1": "H",
     "2": "J",
@@ -46,13 +46,13 @@ base16_encode_conversion = {
     "F": "F"
 }
 
-base16_decode_conversion = dict((y,x) for x,y in base16_encode_conversion.iteritems())
+dumb16_to_base16 = dict((y,x) for x,y in base16_encode_conversion.iteritems())
 
 def encode(message):
-    return "".join([base16_encode_conversion[char] for char in base64.b16encode(message)])
+    return "".join([base16_to_dumb16[char] for char in base64.b16encode(message)])
 
 def decode(message):
-    return base64.b16decode("".join([base16_decode_conversion[char] for char in message]))
+    return base64.b16decode("".join([dumb16_to_base16[char] for char in message]))
 
 def frobulate(message):
     # Split the message
