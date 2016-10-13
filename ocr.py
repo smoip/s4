@@ -4,6 +4,8 @@ import os
 import re
 import random
 import string
+import base64
+from IPython import embed
 
 # Pre-reqs:
 # brew install tesseract
@@ -24,6 +26,33 @@ stuff = {
     "max-chars-per-line": 30,
     "target": "test.png"
 }
+
+base16_encode_conversion = {
+    "0": "G",
+    "1": "H",
+    "2": "J",
+    "3": "K",
+    "4": "L",
+    "5": "M",
+    "6": "N",
+    "7": "P",
+    "8": "Q",
+    "9": "R",
+    "A": "A",
+    "B": "B",
+    "C": "C",
+    "D": "D",
+    "E": "E",
+    "F": "F"
+}
+
+base16_decode_conversion = dict((y,x) for x,y in base16_encode_conversion.iteritems())
+
+def encode(message):
+    return "".join([base16_encode_conversion[char] for char in base64.b16encode(message)])
+
+def decode(message):
+    return base64.b16decode("".join([base16_decode_conversion[char] for char in message]))
 
 def frobulate(message):
     # Split the message
@@ -46,4 +75,4 @@ def frobulate(message):
 def random_string(n):
     return ''.join(random.SystemRandom().choice(string.ascii_uppercase) for _ in range(n))
 
-frobulate(random_string(390))
+frobulate(encode(random_string(180)))
